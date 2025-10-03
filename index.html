@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPSM ENV1RONHACK 2025 - ระบบบันทึกคะแนน</title>
+
+  <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <style>
-   body {
+    body {
       font-family: "Segoe UI", Tahoma, sans-serif;
-      background: url("envi.png") no-repeat top center fixed; /* ✅ ชิดบนตรงกลาง */
-      background-size: cover; /* ✅ ให้ภาพเต็มจอ */
+      background: url("envi.png") no-repeat top center fixed; /* ✅ BG ชิดบนตรงกลาง */
+      background-size: cover;
       margin: 0;
       padding: 0;
     }
@@ -18,13 +21,12 @@
       margin: 60px auto;
       background: rgba(255, 255, 255, 0.2);   /* ✅ โปร่งใส */
       backdrop-filter: blur(12px);            /* ✅ ฟรอสต์แก้ว */
-      -webkit-backdrop-filter: blur(12px);    /* ✅ รองรับ Safari */
+      -webkit-backdrop-filter: blur(12px);
       padding: 25px;
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.3); /* ✅ ขอบแก้ว */
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
-
     h2 {
       text-align: center;
       color: #006633;
@@ -67,7 +69,7 @@
     <h2>ระบบบันทึกคะแนน</h2>
 
     <form id="scoreForm">
-      <!-- เลือกระดับชั้น -->
+      <!-- ระดับชั้น -->
       <div class="form-group">
         <label>ระดับชั้น</label>
         <select id="level" required>
@@ -77,7 +79,7 @@
         </select>
       </div>
 
-      <!-- เลือกทีม -->
+      <!-- ทีม -->
       <div class="form-group">
         <label>ทีม</label>
         <select id="team" required>
@@ -85,8 +87,7 @@
         </select>
       </div>
 
-    
-            <!-- ชื่อกรรมการ -->
+      <!-- กรรมการ -->
       <div class="form-group">
         <label>ชื่อกรรมการ</label>
         <select id="judge" required>
@@ -97,32 +98,31 @@
         </select>
       </div>
 
-
-      <!-- คะแนนตามเกณฑ์ -->
-      <div class="form-group"><label>ความเข้าใจในปัญหา (20)</label><input type="number" id="problem" max="20" required></div>
-      <div class="form-group"><label>ความคิดสร้างสรรค์และนวัตกรรม (20)</label><input type="number" id="creativity" max="20" required></div>
-      <div class="form-group"><label>ความเป็นไปได้ของแนวคิดนวัตกรรม (20)</label><input type="number" id="feasibility" max="20" required></div>
-      <div class="form-group"><label>ความสอดคล้องกับหลัก ESG (10)</label><input type="number" id="esg" max="10" required></div>
-      <div class="form-group"><label>การนำเสนอและการตอบคำถาม (30)</label><input type="number" id="presentation" max="30" required></div>
+      <!-- คะแนน -->
+      <div class="form-group"><label>ความเข้าใจปัญหา (20)</label><input type="number" id="problem" max="20" required></div>
+      <div class="form-group"><label>ความคิดสร้างสรรค์ (20)</label><input type="number" id="creativity" max="20" required></div>
+      <div class="form-group"><label>ความเป็นไปได้ (20)</label><input type="number" id="feasibility" max="20" required></div>
+      <div class="form-group"><label>ESG (10)</label><input type="number" id="esg" max="10" required></div>
+      <div class="form-group"><label>การนำเสนอ (30)</label><input type="number" id="presentation" max="30" required></div>
 
       <button type="submit">บันทึกคะแนน</button>
     </form>
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzFTpPTumQoiSGpHumJjvqV9GemDoyLzN8NjTf_l-akiD6Jx3HIbculNGag_NMZxjn1g/exec"; // ใส่ URL จาก Apps Script
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzFTpPTumQoiSGpHumJjvqV9GemDoyLzN8NjTf_l-akiD6Jx3HIbculNGag_NMZxjn1g/exec"; // ✅ ใส่ Google Apps Script URL
 
-    // ทีมที่แบ่งตามระดับ
+    // รายชื่อทีมแบ่งตามระดับ
     const teams = {
       "มัธยมปลาย": [
-        "UAI", "จ้องมองโพทาเซียม", "เต่างอยซีซั่น 4 ตอนที่ 2 ภาค SPSM (พากย์ไทยเต็มเรื่อง)", 
-        "LENE_jai", "WolffiaCleanerX", "Caffinity",
-        "ต้นฟอกใจ", "กำลังคิดอยู่"
+        "UAI", "จ้องมองโฟทาเซียม", "เต่างอยซีซั่น 4", 
+        "LENE_jaii", "WolffiaCleanerX", "Caffinity",
+        "ต้นฟอกใจ", "กำลังจัดอยู่"
       ],
       "มัธยมต้น": [
-        "The Power of 3", "Gaia warriors", "โชคลาภ", 
+        "The Power of 3", "Gaia warriors", "โชคลาภา", 
         "PANMA", "Sheure-team", "Peptidoglycan The Survivor", 
-        "เอ้อร์", "CORNcept SAVEariel"
+        "เอื้อร์", "CORNcept SAVEriel"
       ]
     };
 
@@ -151,33 +151,57 @@
     document.getElementById("scoreForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      if (!confirm("ยืนยันการบันทึกคะแนนหรือไม่?")) {
-        return;
-      }
+      Swal.fire({
+        title: "ยืนยันการบันทึก?",
+        text: "ตรวจสอบคะแนนให้เรียบร้อยก่อนกดตกลง",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "ตกลง",
+        cancelButtonText: "ยกเลิก",
+      }).then((result) => {
+        if (!result.isConfirmed) return;
 
-      const data = {
-        level: document.getElementById("level").value,
-        team: document.getElementById("team").value,
-        judge: document.getElementById("judge").value,
-        problem: Number(document.getElementById("problem").value),
-        creativity: Number(document.getElementById("creativity").value),
-        feasibility: Number(document.getElementById("feasibility").value),
-        esg: Number(document.getElementById("esg").value),
-        presentation: Number(document.getElementById("presentation").value),
-      };
-      data.total = data.problem + data.creativity + data.feasibility + data.esg + data.presentation;
+        const btn = e.target.querySelector("button[type='submit']");
+        btn.disabled = true;
+        btn.textContent = "⏳ กำลังบันทึก...";
 
-      fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify(data),
-      })
-      .then(res => res.json())
-      .then(res => {
-        alert("✅ บันทึกสำเร็จ! คะแนนรวม: " + data.total);
-        document.getElementById("scoreForm").reset();
-      })
-      .catch(err => {
-        alert("❌ เกิดข้อผิดพลาดในการบันทึก");
+        const data = {
+          level: document.getElementById("level").value,
+          team: document.getElementById("team").value,
+          judge: document.getElementById("judge").value,
+          problem: Number(document.getElementById("problem").value),
+          creativity: Number(document.getElementById("creativity").value),
+          feasibility: Number(document.getElementById("feasibility").value),
+          esg: Number(document.getElementById("esg").value),
+          presentation: Number(document.getElementById("presentation").value),
+        };
+        data.total = data.problem + data.creativity + data.feasibility + data.esg + data.presentation;
+
+        fetch(SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify(data),
+        })
+        .then(res => res.json())
+        .then(res => {
+          Swal.fire({
+            title: "✅ บันทึกสำเร็จ!",
+            text: "คะแนนรวม: " + data.total,
+            icon: "success",
+            confirmButtonText: "ตกลง"
+          });
+          document.getElementById("scoreForm").reset();
+        })
+        .catch(err => {
+          Swal.fire({
+            title: "❌ เกิดข้อผิดพลาด",
+            text: "ไม่สามารถบันทึกคะแนนได้",
+            icon: "error",
+          });
+        })
+        .finally(() => {
+          btn.disabled = false;
+          btn.textContent = "บันทึกคะแนน";
+        });
       });
     });
   </script>
