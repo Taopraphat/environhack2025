@@ -11,29 +11,30 @@
   <style>
     body {
       font-family: "Segoe UI", Tahoma, sans-serif;
-      background: url("envi.png") no-repeat top center fixed; /* ✅ BG ชิดบนตรงกลาง */
-      background-size: cover;
+      background: #f0f5f3; /* ✅ สีพื้นหลังเรียบ */
       margin: 0;
       padding: 0;
     }
     .container {
       max-width: 520px;
-      margin: 60px auto;
-      background: rgba(255, 255, 255, 0.2);   /* ✅ โปร่งใส */
-      backdrop-filter: blur(12px);            /* ✅ ฟรอสต์แก้ว */
-      -webkit-backdrop-filter: blur(12px);
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.95);
       padding: 25px;
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      text-align: center;
+    }
+    .logo {
+      width: 120px;
+      margin-bottom: 10px;
     }
     h2 {
-      text-align: center;
       color: #006633;
-      margin-bottom: 20px;
+      margin: 5px 0 20px;
     }
     .form-group {
       margin-bottom: 15px;
+      text-align: left;
     }
     label {
       font-weight: bold;
@@ -46,7 +47,7 @@
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 16px; /* ✅ กัน zoom บนมือถือ */
     }
     button {
       width: 100%;
@@ -66,7 +67,9 @@
 </head>
 <body>
   <div class="container">
-    <h2>ระบบบันทึกคะแนน</h2>
+    <!-- ✅ โลโก้แทนหัวข้อ -->
+    <img src="logo.png" alt="Logo" class="logo">
+    <h2>การตัดสินรอบชิงชนะเลิศ</h2>
 
     <form id="scoreForm">
       <!-- ระดับชั้น -->
@@ -110,9 +113,9 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzFTpPTumQoiSGpHumJjvqV9GemDoyLzN8NjTf_l-akiD6Jx3HIbculNGag_NMZxjn1g/exec"; // ✅ ใส่ Google Apps Script URL
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzFTpPTumQoiSGpHumJjvqV9GemDoyLzN8NjTf_l-akiD6Jx3HIbculNGag_NMZxjn1g/exec"; // ✅ URL จาก Google Apps Script
 
-    // รายชื่อทีมแบ่งตามระดับ
+    // ทีมแบ่งตามระดับ
     const teams = {
       "มัธยมปลาย": [
         "UAI", "จ้องมองโฟทาเซียม", "เต่างอยซีซั่น 4", 
