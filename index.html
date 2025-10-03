@@ -5,21 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPSM ENV1RONHACK 2025 - ระบบบันทึกคะแนน</title>
   <style>
-    body {
+   body {
       font-family: "Segoe UI", Tahoma, sans-serif;
-      background: src="envi.png" no-repeat center center fixed;
-      background-size: cover;
+      background: url("envi.png") no-repeat top center fixed; /* ✅ ชิดบนตรงกลาง */
+      background-size: cover; /* ✅ ให้ภาพเต็มจอ */
       margin: 0;
       padding: 0;
     }
     .container {
       max-width: 520px;
       margin: 60px auto;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.2);   /* ✅ โปร่งใส */
+      backdrop-filter: blur(12px);            /* ✅ ฟรอสต์แก้ว */
+      -webkit-backdrop-filter: blur(12px);    /* ✅ รองรับ Safari */
       padding: 25px;
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3); /* ✅ ขอบแก้ว */
     }
+
     h2 {
       text-align: center;
       color: #006633;
