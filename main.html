@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบบันทึกคะแนน</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    .form-group { margin-bottom: 10px; }
+    label { display: block; margin-bottom: 5px; }
+    input, select { padding: 5px; width: 100%; }
+    button { padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h2>ระบบบันทึกคะแนน</h2>
+
+  <form id="scoreForm">
+    <div class="form-group">
+      <label>ทีม</label>
+      <select id="team">
+        <option value="UAI">UAI</option>
+        <option value="จ้องมองโฟทาเซียม">จ้องมองโฟทาเซียม</option>
+        <option value="ทีมอื่นๆ">ทีมอื่นๆ</option>
+      </select>
+    </div>
+    <div class="form-group"><label>ชื่อกรรมการ</label><input id="judge" required></div>
+    <div class="form-group"><label>ความเข้าใจปัญหา (20)</label><input type="number" id="problem" max="20" required></div>
+    <div class="form-group"><label>ความคิดสร้างสรรค์ (20)</label><input type="number" id="creativity" max="20" required></div>
+    <div class="form-group"><label>ความเป็นไปได้ (20)</label><input type="number" id="feasibility" max="20" required></div>
+    <div class="form-group"><label>ESG (10)</label><input type="number" id="esg" max="10" required></div>
+    <div class="form-group"><label>การนำเสนอ (30)</label><input type="number" id="presentation" max="30" required></div>
+
+    <button type="submit">บันทึกคะแนน</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzFTpPTumQoiSGpHumJjvqV9GemDoyLzN8NjTf_l-akiD6Jx3HIbculNGag_NMZxjn1g/exec"; // ใส่ URL จาก Apps Script
+
+    document.getElementById("scoreForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const data = {
+        team: document.getElementById("team").value,
+        judge: document.getElementById("judge").value,
+        problem: Number(document.getElementById("problem").value),
+        creativity: Number(document.getElementById("creativity").value),
+        feasibility: Number(document.getElementById("feasibility").value),
+        esg: Number(document.getElementById("esg").value),
+        presentation: Number(document.getElementById("presentation").value),
+      };
+      data.total = data.problem + data.creativity + data.feasibility + data.esg + data.presentation;
+
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(data),
+      })
+      .then(res => res.json())
+      .then(res => {
+        document.getElementById("status").innerText = "บันทึกสำเร็จ ✔️ คะแนนรวม: " + data.total;
+        document.getElementById("scoreForm").reset();
+      })
+      .catch(err => {
+        document.getElementById("status").innerText = "เกิดข้อผิดพลาด ❌";
+      });
+    });
+  </script>
+</body>
+</html>
